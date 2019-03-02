@@ -1,0 +1,9 @@
+.idea/
+node_modules/
+build/
+admin/.idea
+admin/build
+admin/node_modules
+webapp/build
+webapp/.idea
+webapp/node_modules

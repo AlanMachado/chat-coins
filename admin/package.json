@@ -1,0 +1,44 @@
+{
+  "name": "chatcoins",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-hbs": "~1.0.4",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.4.1",
+    "morgan": "~1.8.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.1"
+  },
+  "devDependencies": {
+    "del": "~2.2.2",
+    "gulp": "~3.9.0",
+    "gulp-changed": "^3.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-imagemin": "~3.2.0",
+    "gulp-livereload": "~3.8.1",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-nodemon": "~2.2.1",
+    "gulp-notify": "~3.0.0",
+    "gulp-plumber": "~1.1.0",
+    "gulp-rev": "~7.1.2",
+    "gulp-rev-collector": "~1.1.1",
+    "gulp-sass": "~3.1.0",
+    "gulp-uglify": "~2.1.2",
+    "gulp-util": "^3.0.8",
+    "node-neat": "~1.7.2"
+  }
+}
