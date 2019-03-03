@@ -7,3 +7,5 @@ admin/node_modules
 webapp/build
 webapp/.idea
 webapp/node_modules
+chatapi/.idea
+chatapi/node_modules
