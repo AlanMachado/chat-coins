@@ -1,5 +1,6 @@
 $(document).ready(function () {
     (function() {
+        $('.chat-box').hide();
         var getRooms = function() {
             return $.get('http://localhost:3000/rooms', function(data){
                 if(!data.status) {
@@ -23,6 +24,8 @@ $(document).ready(function () {
     })()
 
     var socket = io('//localhost:3000');
+    var currentRoom;
+
 
     function templateMessage(option) {
         var div = $(document.createElement('div')).addClass('col-xs-12 message');
@@ -52,33 +55,85 @@ $(document).ready(function () {
     }
 
     function templateRoomItem(room) {
-        var li = $(document.createElement('li')).addClass('list-group-item');
+        var li = $(document.createElement('li')).addClass('list-group-item channel');
         var i = $(document.createElement('i')).addClass('fa fa-comment-o');
-        li.attr('data-channel', room._id)
+        li.attr('data-channel', room._id);
+        li.attr('data-name', room.name);
         i[0].innerHTML = room.name;
         li.append(i);
 
         return li;
     }
 
-    // receives information
-    socket.on('message', function (data) {
-        $('.conversation').append(templateMessage({who: 'L', message: data}));
+    $('.channels').on('click', '.channel', function(e) {
+       var roomId = $(this).attr('data-channel');
+       var roomName = $(this).attr('data-name');
+
+       socket.emit('join room', {
+           room: roomId,
+           roomName: roomName
+       });
+
+       $('.conversation').html('');
+
+       return false;
     });
 
 
-    $('#message').keypress(function (e) {
+    $('#message').on('keypress', function (e) {
 
-        if (e.which === 13) {
-            var val = $(this).val();
+        if (e.which === 13 || e.keyCode === 13) {
+            var message = $(this).val();
 
+            if (!message) {
+                return;
+            }
             // send information, can be a message or a json object
-            socket.emit('message', val);
+            socket.emit('message room', {
+                message,
+                room: currentRoom
+            });
+
+            $('.conversation').append(templateMessage({who: 'L', message: message}));
+
+            $('#message').val('');
 
             return false;
         }
     });
 
+    $('#leave').on('click', function (e) {
+        var roomId = $(this).attr('data-channel');
+
+        socket.emit('leave room', {
+            room: roomId
+        });
+
+        return false;
+    });
+
+
+
+    // receives information
+    socket.on('message room', function (data) {
+        if (!data.message){
+            return;
+        }
+
+        $('.conversation').append(templateMessage({who: 'L', message: data.message}));
+    });
+    
+    socket.on('joined room', function (data) {
+        currentRoom = data.room;
+        $('#leave').attr('data-channel', data.room);
+        $('.username').html(`@${data.roomName}`);
+        $('.chat-box').show();
+    });
+
+    socket.on('leaved room', function (data) {
+        currentRoom = undefined;
+        $('.chat-box').hide();
+    });
 });
 
 
