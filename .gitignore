@@ -9,3 +9,5 @@ webapp/.idea
 webapp/node_modules
 chatapi/.idea
 chatapi/node_modules
+chatapp/.idea
+chatapp/node_modules
