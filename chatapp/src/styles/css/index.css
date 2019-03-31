@@ -1,0 +1,118 @@
+/*
+@import "App";
+@import "Body";
+@import "Code";*/
+html {
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  height: 100%;
+  background: #fefefe;
+}
+
+main {
+  min-height: 100%;
+  height: 100%;
+}
+
+.chat-bar {
+  padding: 0;
+  background: #3C382C;
+  min-height: 100%;
+  height: 100%;
+}
+.chat-bar .title {
+  color: white;
+  background: #322F24;
+  padding: 1rem 15px;
+}
+.chat-bar .title h4 {
+  display: inline-block;
+}
+.chat-bar .channels {
+  margin: 6rem 0;
+}
+.chat-bar .channels .list-group-item {
+  border: 0;
+  background: #3C382C;
+  color: #857D64;
+  cursor: pointer;
+}
+.chat-bar .channels .list-group-item.title h4 {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1em;
+}
+.chat-bar .channels .list-group-item:hover, .chat-bar .channels .list-group-item:active {
+  background: #322F24;
+}
+.chat-bar .messages {
+  margin: 3.5rem 0;
+}
+.chat-bar .messages .list-group-item {
+  border: 0;
+  background: #3C382C;
+  color: #857D64;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.chat-bar .messages .list-group-item.title h4 {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1em;
+}
+.chat-bar .messages .list-group-item:hover, .chat-bar .messages .list-group-item:active {
+  background: #322F24;
+}
+
+.chat-box {
+  padding: 0;
+}
+.chat-box .header {
+  padding: 1rem 15px;
+  border-bottom: 1px solid #ebebeb;
+}
+.chat-box .header .username {
+  font-size: 1em;
+  font-weight: bold;
+}
+.chat-box .conversation .message {
+  margin: 1em 0 0 0;
+}
+.chat-box .conversation .message.first-child {
+  margin: 1em 0;
+}
+.chat-box .conversation .message .avatar {
+  border-radius: 10%;
+  border: 1px solid #ebebeb;
+  padding: 1rem 0;
+  background: #3C382C;
+}
+.chat-box .conversation .message .avatar h2 {
+  color: white;
+  text-align: center;
+  margin: 0;
+  font-weight: bold;
+}
+.chat-box .conversation .message .text {
+  padding: 0.8em 15px;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.2em;
+}
+.chat-box .type {
+  margin: 1rem 0 0 0;
+}
+.chat-box .type form .form-control {
+  border: 1px solid #3C382C;
+}
+.chat-box .type form .form-control:focus {
+  box-shadow: none;
+}
+
+/*# sourceMappingURL=index.css.map */

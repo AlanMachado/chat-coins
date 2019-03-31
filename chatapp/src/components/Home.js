@@ -12,22 +12,31 @@ class Home extends Component {
             currentUser: undefined,
             currentRoom: undefined
         }
-
-        socket.on('joined user', function (data){
-            this.setState({currentUser: data.user, currentRoom: undefined});
-        });
-
-        socket.on('joined room', function (data){
-            this.setState({currentUser: undefined, currentRoom: data.room});
-        });
-
     }
+
+    componentDidMount() {
+        socket.on('joined user', (data) => {
+            this.controlRooms(data);
+            console.log("joined user " + data.user);
+        });
+
+        socket.on('joined room', (data) => {
+            this.controlRooms(data);
+            console.log("joined room " + data.room);
+        });
+    }
+
+    controlRooms = (data) => {
+        this.setState({currentUser: data.user ? data : undefined, currentRoom: data.room ? data : undefined});
+    }
+
+
 
     render() {
         return (
             <main>
-                <Channels/>
-                <Chat currentUser={this.state.currentUser} currentRoom={this.state.currentRoom}/>
+                <Channels socket={socket} />
+                <Chat socket={socket} currentUser={this.state.currentUser} currentRoom={this.state.currentRoom}/>
             </main>
         )
     }

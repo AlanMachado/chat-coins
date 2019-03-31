@@ -44,8 +44,11 @@ class Channels extends Component {
                     <h4>ChatCoins</h4>
                 </div>
                 <ul className="list-group channels">
+                    <li className="list-group-item title">
+                        <h4>Channels({this.state.rooms.length})</h4>
+                    </li>
                     {this.state.rooms.map((room, key) => {
-                        return <GroupChannel key={room._id} room={room}/>
+                        return <GroupChannel socket={this.props.socket} key={room._id} room={room}/>
                     })}
                 </ul>
                 <ul className="list-group messages">
@@ -53,7 +56,7 @@ class Channels extends Component {
                         <h4>Mensagens</h4>
                     </li>
                     {this.state.users.map((user, key) => {
-                        return <PersonChannel key={user._id} user={user}/>
+                        return <PersonChannel csocket={this.props.socket} key={user._id} user={user}/>
                     })}
                 </ul>
             </aside>

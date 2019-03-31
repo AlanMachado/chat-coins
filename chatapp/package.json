@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "font-awesome": "^4.7.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1",
@@ -13,9 +15,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "sass src/styles/scss:src/styles/css && react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sass": "sass --watch src/styles/scss:src/styles/css"
   },
   "eslintConfig": {
     "extends": "react-app"

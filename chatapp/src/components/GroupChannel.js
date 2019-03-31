@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-let socket = require('socket.io-client')('http://localhost:3030');
 
 class GroupChannel extends Component {
 
@@ -8,7 +7,7 @@ class GroupChannel extends Component {
     }
 
     joinRoom = () => {
-        socket.emit('join room', {
+        this.props.socket.emit('join room', {
             room: this.props.room._id,
             roomName: this.props.room.name
         });

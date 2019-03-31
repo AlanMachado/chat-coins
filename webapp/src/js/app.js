@@ -117,7 +117,7 @@ $(document).ready(function () {
            roomName: roomName
        });
 
-       $('.conversation').html('');
+       $('.username').html('');
 
        return false;
     });

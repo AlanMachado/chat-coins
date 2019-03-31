@@ -1,43 +1,53 @@
 import React, { Component } from 'react';
 import Message from './Message';
-let socket = require('socket.io-client')('http://localhost:3030');
 
 class Chat extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
-            message: []
+            messages: [],
+            username: '',
+            currentUser: undefined,
+            currentRoom: undefined,
         }
     }
 
-    sendMessage = (e) => {
-        let message = e.target.value;
+    componentWillReceiveProps(nextProps) {
+        let username = nextProps.currentUser ? nextProps.currentUser.userName : '';
+        username = nextProps.currentRoom ? nextProps.currentRoom.roomName : '';
 
+        this.setState({currentUser: nextProps.currentUser, currentRoom: nextProps.currentRoom, username: username});
+
+    }
+
+    sendMessage = (e) => {
+
+        let message = e.target.value;
         if (e.which === 13 || e.keyCode === 13) {
+            e.preventDefault();
             if (!message) {
                 return;
             }
 
-            if (this.props.currentUser) {
-
-                socket.emit('message user', {
+            if (this.state.currentUser) {
+                this.props.socket.emit('message user', {
                     message,
-                    user: this.props.currentUser
+                    user: this.state.currentUser.user
                 });
 
-            } else {
+            } else if (this.state.currentRoom) {
 
-                socket.emit('message room', {
+                this.props.socket.emit('message room', {
                     message,
-                    room: this.props.currentRoom
+                    room: this.state.currentRoom.room
                 });
 
             }
 
-            this.setState({message: this.state.message.push({who: 'T', message: message})});
+            e.target.value = "";
+            this.setState({ messages: this.state.messages.concat({who: 'T', message: message})});
 
-            //e.target.value("");
         }
     }
 
@@ -46,11 +56,11 @@ class Chat extends Component {
         return (
             <section className="col-xs-6 col-md-10 chat-box">
                 <header className="col-xs-12 header">
-                    <span className="username"></span>
-                    <button type="button" className="btn btn-default pull-right" id="leave">Leave</button>
+                    <span className="username">{this.state.username}</span>
+                    <button type="button" className="btn btn-default pull-right">Leave</button>
                 </header>
                 <div className="col-xs-12 conversation">
-                    {this.state.message.map((msg, key) => {
+                    {this.state.messages.map((msg, key) => {
                         return <Message who={msg.who} message={msg.message}/>
                     })}
                 </div>
